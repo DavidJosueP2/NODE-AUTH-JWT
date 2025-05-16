@@ -31,12 +31,7 @@ export class RegisterUser implements RegisterUserUseCase {
 
 
     async execute(registerUserDto: RegisterUserDto): Promise<UserToken> {
-        //Crear usuario
-
         const user = await this.authRepository.register(registerUserDto);
-
-        //Token
-
         const token = await this.signToken({ id: user.id }, '2h');
 
         if (!token) {
